@@ -1,2 +1,2 @@
 # Parliament-app-android
-![Screenshot](screenshots/screenshot.png)
+![Screenshot](screenshots/Home.png)
