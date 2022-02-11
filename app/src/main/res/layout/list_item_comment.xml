@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="comment"
+            type="com.fuka.suomeneduskunta.data.database.models.Comment" />
+
+        <variable
+            name="viewModel"
+            type="com.fuka.suomeneduskunta.ui.viewModels.MemberDetailViewModel" />
+
+        <variable
+            name="click_listner"
+            type="com.fuka.suomeneduskunta.utils.adapters.CommentItemListner" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small">
+
+        <TextView
+            android:id="@+id/comment_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/user_name"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/user_name" />
+
+        <TextView
+            android:id="@+id/comment_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{comment.commentContent}"
+            android:textAlignment="center"
+            android:textColor="@color/eduskuntaSininen"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comment_header"
+            tools:text="@string/lorem_ipsum_long" />
+
+        <TextView
+            android:id="@+id/comment_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/comment_footer"
+            android:textAlignment="center"
+            android:textSize="8sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comment_content"
+            tools:text="@{comment.commentDate}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

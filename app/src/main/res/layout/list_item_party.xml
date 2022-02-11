@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="party"
+            type="com.fuka.suomeneduskunta.data.database.models.ParliamentMember" />
+
+        <variable
+            name="clickListner"
+            type="com.fuka.suomeneduskunta.utils.adapters.PartyItemListner" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/member_list_item_border_bottom"
+        android:onClick="@{() -> clickListner.onClick(party)}">
+
+        <ImageView
+            android:id="@+id/party_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/party_logo_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:partyLogo="@{party}"
+            tools:srcCompat="@drawable/ic_face" />
+
+        <TextView
+            android:id="@+id/party_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/eduskuntaSininen"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/party_image"
+            app:partyName="@{party}"
+            tools:text="PartyName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

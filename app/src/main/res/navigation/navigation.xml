@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.fuka.suomeneduskunta.ui.fragments.HomeFragment"
+        android:label="Suomen eduskunta">
+        <action
+            android:id="@+id/action_homeFragment_to_partiesFragment"
+            app:destination="@id/partiesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mebmerDetailFragment"
+            app:destination="@id/mebmerDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/partiesFragment"
+        android:name="com.fuka.suomeneduskunta.ui.fragments.PartiesFragment"
+        android:label="Eduskuntapuolueet"
+        tools:layout="@layout/fragment_parties">
+        <action
+            android:id="@+id/action_partiesFragment_to_partyMembersFragment"
+            app:destination="@id/partyMembersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/partyMembersFragment"
+        android:name="com.fuka.suomeneduskunta.ui.fragments.PartyMembersFragment"
+        android:label="Puoluejäsenet">
+        <argument
+            android:name="partyId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_partyMembersFragment_to_mebmerDetailFragment"
+            app:destination="@id/mebmerDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mebmerDetailFragment"
+        android:name="com.fuka.suomeneduskunta.ui.fragments.MemberDetailFragment"
+        android:label="Puoluejäsen">
+        <argument
+            android:name="hetkaId"
+            app:argType="integer" />
+    </fragment>
+</navigation>

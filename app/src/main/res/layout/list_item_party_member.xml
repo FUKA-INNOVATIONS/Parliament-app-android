@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="member"
+            type="com.fuka.suomeneduskunta.data.database.models.ParliamentMember" />
+
+        <variable
+            name="clickListner"
+            type="com.fuka.suomeneduskunta.utils.adapters.PartyMemberItemListner" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{() -> clickListner.onClick(member)}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_small"
+        android:paddingTop="@dimen/padding_mini"
+        android:paddingEnd="@dimen/padding_small">
+
+
+        <ImageView
+            android:id="@+id/member_image"
+            android:layout_width="@dimen/member_image_small_width"
+            android:layout_height="@dimen/member_image_small_height"
+            android:contentDescription="@string/desc_party_member_image"
+            app:imageUrl="@{member.pictureUrl}"
+            app:layout_constraintEnd_toStartOf="@+id/member_firstname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_face" />
+
+        <TextView
+            android:id="@+id/member_firstname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{member.firstname}"
+            android:textColor="@color/eduskuntaSininen"
+            app:layout_constraintStart_toEndOf="@+id/member_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/first_name" />
+
+        <TextView
+            android:id="@+id/member_lastname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{member.lastname}"
+            android:textColor="@color/eduskuntaSininen"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/member_firstname"
+            app:layout_constraintTop_toBottomOf="@+id/member_firstname"
+            tools:text="@string/lastname" />
+
+        <TextView
+            android:id="@+id/member_minister_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/member_lastname"
+            app:layout_constraintTop_toBottomOf="@+id/member_lastname"
+            app:ministerStatus="@{member}"
+            tools:text="@string/paaministeri_text" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

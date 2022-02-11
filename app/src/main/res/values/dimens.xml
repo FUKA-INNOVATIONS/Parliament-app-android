@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_small">16dp</dimen>
+    <dimen name="padding_mini">8dp</dimen>
+    <dimen name="margin_small">16dp</dimen>
+    <dimen name="member_image_width">150dp</dimen>
+    <dimen name="member_image_height">225dp</dimen>
+    <dimen name="member_image_small_width">75dp</dimen>
+    <dimen name="member_image_small_height">112dp</dimen>
+    <dimen name="member_detail_pary_name">22sp</dimen>
+    <dimen name="member_detail_status">15sp</dimen>
+    <dimen name="padding_big">32dp</dimen>
+</resources>

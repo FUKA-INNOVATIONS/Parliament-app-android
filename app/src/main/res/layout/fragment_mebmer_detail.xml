@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.fuka.suomeneduskunta.ui.viewModels.MemberDetailViewModel" />
+
+        <variable
+            name="member"
+            type="com.fuka.suomeneduskunta.data.database.models.ParliamentMember" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/write_comment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:focusable="false"
+            android:visibility="visible"
+            app:backgroundTint="@color/white"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="@+id/comment_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rippleColor="@color/white"
+            app:srcCompat="@drawable/ic_baseline_edit_24"
+            android:contentDescription="@string/button_for_opening_comment_box" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/eduskuntaSininen"
+            android:padding="@dimen/padding_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:background="@drawable/image_borer"
+                android:id="@+id/parliament_member_image"
+                android:layout_width="@dimen/member_image_width"
+                android:layout_height="@dimen/member_image_height"
+                android:contentDescription="@string/member_image_text"
+                android:cropToPadding="false"
+                tools:src="@mipmap/ic_launcher_round"
+                app:imageUrl="@{viewModel.memberData.pictureUrl}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/member_first_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
+                android:text="@{viewModel.memberData.firstname}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/parliament_member_image"
+                app:layout_constraintTop_toTopOf="@+id/parliament_member_image"
+                tools:text="@string/text_sanna" />
+
+            <TextView
+                android:id="@+id/member_last_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.memberData.lastname}"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/member_first_name"
+                app:layout_constraintTop_toBottomOf="@+id/member_first_name"
+                tools:text="@string/text_marin" />
+
+            <TextView
+                app:ministerStatusOnMemberDetail="@{Boolean.toString(viewModel.memberData.minister)}"
+                android:id="@+id/minister_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="4dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/member_detail_pary_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/member_last_name"
+                app:layout_constraintTop_toBottomOf="@+id/member_last_name"
+                tools:text="@string/paaministeri_text"
+                android:text="@string/paaministeri_text"/>
+
+            <TextView
+                android:text="@{viewModel.memberData.party.toUpperCase()}"
+                android:id="@+id/member_party_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/minister_status"
+                app:layout_constraintTop_toBottomOf="@+id/minister_status"
+                tools:text="@string/ssd_text" />
+
+            <Button
+                android:onClick="@{() -> viewModel.likePressed()}"
+                android:id="@+id/member_like_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:insetBottom="0dp"
+                android:paddingLeft="0dp"
+                android:text="@string/tykkaa_text"
+                app:icon="@drawable/ic_thumb_up"
+                app:layout_constraintBottom_toBottomOf="@+id/parliament_member_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/member_party_name" />
+
+            <TextView
+                android:id="@+id/member_likes_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.memberLikesCount.toString()}"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/member_like_button"
+                app:layout_constraintTop_toTopOf="@+id/member_like_button"
+                tools:text="@string/member_likes_counter_text" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/palautteet_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/palautteet_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_baseline_comment_24"
+                android:text="@string/palautteet_text" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comment_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/palautteet_header"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/comment_box"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_small"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/comment_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/close_comment_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/desc_party_member_image"
+                android:focusable="false"
+                android:tint="@color/eduskuntaSininen"
+                app:backgroundTint="@color/white"
+                app:elevation="0.5dp"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toTopOf="@+id/comment_text_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:rippleColor="@color/white"
+                app:srcCompat="@android:drawable/ic_delete" />
+
+            <EditText
+                android:singleLine="false"
+                android:id="@+id/comment_text_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/plaute_max_size"
+                android:inputType="textPersonName"
+                android:maxLength="100"
+                android:maxLines="3"
+                android:minHeight="60dp"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/add_comment_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/add_comment_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jata_palaute_text"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
